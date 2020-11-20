@@ -113,11 +113,33 @@ App = {
             //$('#token-balance').html("You currently have " + balance.toNumber() + " Token");
             $('#token-balance').html(balance.toNumber());
             console.log(balance.toNumber());
+            // show everything at the end of promise chain (when everything else was done successfully)
+            App.loading = false;
+            loader.hide();
+            content.show();
         })
-        // show everything
-        App.loading = false;
-        loader.hide();
-        content.show();
+    },
+
+    // setSwap function that will be triggered as soon as submit button ("Swap Tokens") is triggered
+    setSwap: function () {
+        var loader = $('#loader');
+        var content = $('#content');
+
+        loader.show();
+        content.hide();
+
+        // get all variables needed for htlc from the html form
+        var receiverAddress = $('#receiverAddress').val();
+        var hashlock = $('#hashlock').val();
+        var timelock = $('#timelock').val();
+        var tokenAmount = $('#numberOfToken').val();
+
+        App.contracts.TokenSwapCoin.deployed().then(function (instance) {
+            TokenSwapCoinInstance = instance;
+            return TokenSwapCoinInstance.address();
+        }).then(function(address) {
+            var tokenContractAddress = address;
+        })
     }
 }
 
