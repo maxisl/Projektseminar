@@ -26,7 +26,7 @@
                 Token ]
             </p>
             <br/>
-            <form role="form"></form>
+            <form onSubmit="App.approveContract();" role="form"></form>
             <div class="form-group">
                 <div class="input-group">
                     Receiver Address :
@@ -43,7 +43,9 @@
                            name="numberOfToken" value="1" min="1" pattern="[0-9]" placeholder="Token Amount"/>
                     <span class="input-group-btn">
                             <!--implement link to success page with contract details?-->
-                            <button type="submit" class="btn btn-success btn-lg">Swap Tokens</button>
+                            <button type="submit" class="btn btn-success btn-lg" >
+                                <!--<a href="success.html">-->Swap Tokens<!--</a>-->
+                            </button>
                         </span>
                 </div>
             </div>

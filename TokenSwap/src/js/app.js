@@ -104,28 +104,55 @@ App = {
             $('#tokenContractAddress').html("Token Contract Address on the Network (Token): " +
                 App.tokenContractAddress);
             return TokenSwapCoinInstance.symbol();
-        }).then(function(symbol) {
+        }).then(function (symbol) {
             //$('#token-balance').html("You currently have " + balance.toNumber() + " Token");
             $('.token-symbol').html(symbol);
             return TokenSwapCoinInstance.balanceOf(App.account);
         })
-        .then(function(balance) {
-            //$('#token-balance').html("You currently have " + balance.toNumber() + " Token");
-            $('#token-balance').html(balance.toNumber());
-            console.log(balance.toNumber());
-            // show everything at the end of promise chain (when everything else was done successfully)
-            App.loading = false;
-            loader.hide();
-            content.show();
+            .then(function (balance) {
+                //$('#token-balance').html("You currently have " + balance.toNumber() + " Token");
+                $('#token-balance').html(balance.toNumber());
+                console.log(balance.toNumber());
+                // show everything at the end of promise chain (when everything else was done successfully)
+                App.loading = false;
+                loader.hide();
+                content.show();
+            })
+    },
+
+    /*
+        approveContract: function() {
+            App.contracts.HashedTimelockERC20.deployed().then(function (instance) {
+                HashedTimelockERC20Instance = instance;
+                return HashedTimelockERC20Instance.address;
+            }).then(function (address) {
+                App.contracts.TokenSwapCoin.deployed().then(function (instance) {
+                    TokenSwapCoinInstance = instance;
+                    return TokenSwapCoinInstance.approve(address, 10000, {from: App.account});
+                })
+            })
+        },*/
+
+    //FIXME
+    approveContract: function () {
+        App.contracts.TokenSwapCoin.deployed().then(function (instance) {
+            TokenSwapCoinInstance = instance;
+            console.log(TokenSwapCoinInstance.totalSupply());
+            web3.eth.getAccounts(function (error, accounts) {
+                if (error) throw error;
+                // Send ERC20 transaction with web3
+                TokenSwapCoinInstance.approve(accounts[1], 10000, {from: accounts[0]}, function (error, txnHash) {
+                    if (error) throw error;
+                    console.log(txnHash);
+                });
+            });
         })
     },
 
+    //FIXME
     // setSwap function that will be triggered as soon as submit button ("Swap Tokens") is triggered
     setSwap: function () {
-        var loader = $('#loader');
         var content = $('#content');
-
-        loader.show();
         content.hide();
 
         // get all variables needed for htlc from the html form
@@ -137,8 +164,28 @@ App = {
         App.contracts.TokenSwapCoin.deployed().then(function (instance) {
             TokenSwapCoinInstance = instance;
             return TokenSwapCoinInstance.address();
-        }).then(function(address) {
-            var tokenContractAddress = address;
+        }).then(function (address) {
+            return address
+        });
+
+        // init swap
+        App.contracts.HashedTimelockERC20.deployed().then(function (instance) {
+            HashedTimelockERC20Instance = instance;
+            return HashedTimelockERC20Instance.setSwap(
+                receiverAddress,
+                address,
+                hashlock,
+                timelock,
+                tokenAmount
+                , { // metadata
+                    from: App.account,
+                    // default value
+                    gas: 5000000
+                }).then(function (result) {
+                console.log("Swap succesfully set");
+                $('form').trigger('reset'); // reset values in form
+                content.show();
+            });
         })
     }
 }
