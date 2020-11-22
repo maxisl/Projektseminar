@@ -26,29 +26,30 @@
                 Token ]
             </p>
             <br/>
-            <form onSubmit="App.approveContract();" role="form"></form>
-            <div class="form-group">
-                <div class="input-group">
-                    Receiver Address :
-                    <input type="text" id="receiverAddress" class="form-control input-lg" name="addressReceiver"
-                           placeholder="0x0">
-                    </br>Hashlock :
-                    <input id="hashlock" class="form-control input-lg" type="number"
-                           name="hashlock" placeholder="Sha256"/>
-                    </br>Timelock :
-                    <input id="timelock" class="form-control input-lg" type="number"
-                           name="timelock" placeholder="seconds"/>
-                    </br>Token Amount :
-                    <input id="numberOfToken" class="form-control input-lg" type="number"
-                           name="numberOfToken" value="1" min="1" pattern="[0-9]" placeholder="Token Amount"/>
-                    <span class="input-group-btn">
+            <form id="form" role="form" onSubmit="App.print(); return false">
+                <div class="form-group">
+                    <div class="input-group">
+                        Receiver Address :
+                        <input type="text" id="receiverAddress" class="form-control input-lg" name="addressReceiver"
+                               placeholder="0x0">
+                        </br>Hashlock :
+                        <input id="hashlock" class="form-control input-lg" type="number"
+                               name="hashlock" placeholder="Sha256"/>
+                        </br>Timelock :
+                        <input id="timelock" class="form-control input-lg" type="number"
+                               name="timelock" placeholder="seconds"/>
+                        </br>Token Amount :
+                        <input id="numberOfToken" class="form-control input-lg" type="number"
+                               name="numberOfToken" value="1" min="1" pattern="[0-9]" placeholder="Token Amount"/>
+                        <span class="input-group-btn">
                             <!--implement link to success page with contract details?-->
-                            <button type="submit" class="btn btn-success btn-lg" >
+                            <button type="submit" class="btn btn-success btn-lg">
                                 <!--<a href="success.html">-->Swap Tokens<!--</a>-->
                             </button>
                         </span>
+                    </div>
                 </div>
-            </div>
+            </form>
             <div class="progress">
                 <div id="progress" class="progress-bar progress-bar-striped-active"
                      aria-valuemin="0" aria-valuemax="100">

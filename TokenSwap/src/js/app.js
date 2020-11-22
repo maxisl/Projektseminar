@@ -137,17 +137,22 @@ App = {
     approveContract: function () {
         App.contracts.TokenSwapCoin.deployed().then(function (instance) {
             TokenSwapCoinInstance = instance;
-            console.log(TokenSwapCoinInstance.totalSupply());
+            console.log(TokenSwapCoinInstance.totalSupply().toNumber());
             web3.eth.getAccounts(function (error, accounts) {
-                if (error) throw error;
-                // Send ERC20 transaction with web3
-                TokenSwapCoinInstance.approve(accounts[1], 10000, {from: accounts[0]}, function (error, txnHash) {
-                    if (error) throw error;
-                    console.log(txnHash);
-                });
+                if (error) {
+                    throw error;
+                } else {
+                    // Send ERC20 transaction with web3
+                    TokenSwapCoinInstance.approve(accounts[1], 10000, {from: accounts[0]}, function (error, txnHash) {
+                        if (error) throw error;
+                        console.log(txnHash);
+                    });
+                }
             });
         })
     },
+
+
 
     //FIXME
     // setSwap function that will be triggered as soon as submit button ("Swap Tokens") is triggered
@@ -187,8 +192,16 @@ App = {
                 content.show();
             });
         })
-    }
+    },
+
+    // testing purposes only
+    print: function () {
+        console.log("That worked");
+    },
+
 }
+
+
 
 // whenever window loads, initialize app
 $(function () {
