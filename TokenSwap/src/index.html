@@ -26,7 +26,7 @@
                 Token ]
             </p>
             <br/>
-            <form id="form" role="form" onSubmit="App.print(); return false">
+            <form id="form" role="form" onSubmit="App.setSwap(); return false">
                 <div class="form-group">
                     <div class="input-group">
                         Receiver Address :
@@ -50,13 +50,9 @@
                     </div>
                 </div>
             </form>
-            <div class="progress">
-                <div id="progress" class="progress-bar progress-bar-striped-active"
-                     aria-valuemin="0" aria-valuemax="100">
-                </div>
             </div>
             <p>Total Supply on the Network [
-                <span class="token-symbol"></span> Token ] :
+                <span id ="token-symbol-homepage" class="token-symbol"></span> Token ] :
                 <span id="token-totalSupply"></span>
             </p>
             <hr>

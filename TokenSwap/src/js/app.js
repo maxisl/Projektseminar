@@ -133,23 +133,27 @@ App = {
             })
         },*/
 
+
     //FIXME
     approveContract: function () {
         App.contracts.TokenSwapCoin.deployed().then(function (instance) {
             TokenSwapCoinInstance = instance;
-            console.log(TokenSwapCoinInstance.totalSupply().toNumber());
-            web3.eth.getAccounts(function (error, accounts) {
-                if (error) {
-                    throw error;
-                } else {
+            return web3.eth.getAccounts()
+        }).then(function(address) {
+            console.log(address);
+        })
+
+        /*App.contracts.TokenSwapCoin.deployed().then(function (instance) {
+            TokenSwapCoinInstance = instance;
+
                     // Send ERC20 transaction with web3
-                    TokenSwapCoinInstance.approve(accounts[1], 10000, {from: accounts[0]}, function (error, txnHash) {
+                    /*return TokenSwapCoinInstance.transfer(accounts[1], 10000,
+                        {from: accounts[0]}, function (error, txnHash) {
                         if (error) throw error;
                         console.log(txnHash);
-                    });
-                }
-            });
-        })
+                    }
+                    );
+                } */
     },
 
 
@@ -168,17 +172,21 @@ App = {
 
         App.contracts.TokenSwapCoin.deployed().then(function (instance) {
             TokenSwapCoinInstance = instance;
-            return TokenSwapCoinInstance.address();
+            return TokenSwapCoinInstance.address;
         }).then(function (address) {
-            return address
-        });
+            var tokenAddress = address;
+        })//TODO idea: turn everything into one promise chain (both contract deployments), so tokenAddress is usable
+         .then(function () {
+        })
+
+
 
         // init swap
         App.contracts.HashedTimelockERC20.deployed().then(function (instance) {
             HashedTimelockERC20Instance = instance;
             return HashedTimelockERC20Instance.setSwap(
                 receiverAddress,
-                address,
+                tokenAddress,
                 hashlock,
                 timelock,
                 tokenAmount
@@ -196,7 +204,13 @@ App = {
 
     // testing purposes only
     print: function () {
-        console.log("That worked");
+        App.contracts.TokenSwapCoin.deployed().then(function (instance) {
+            TokenSwapCoinInstance = instance;
+            return TokenSwapCoinInstance.totalSupply();
+        }).then(function(result) {
+            console.log(result.toNumber());
+        })
+        //console.log("That worked");
     },
 
 }

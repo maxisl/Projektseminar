@@ -13,6 +13,10 @@
     color: red;
 }
 
+#token-symbol-homepage{
+    font-weight: bold;
+}
+
 /*
 #tokenContractAddress {
     font-weight: bold;
