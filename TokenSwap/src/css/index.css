@@ -3,6 +3,11 @@
     color: gray;
 }
 
+.token-symbol{
+    font-weight: bold;
+}
+
+
 #token-balance {
     font-weight: bold;
     color: green;
@@ -13,9 +18,7 @@
     color: red;
 }
 
-#token-symbol-homepage{
-    font-weight: bold;
-}
+
 
 /*
 #tokenContractAddress {

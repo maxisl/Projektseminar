@@ -88,7 +88,7 @@ App = {
                 console.log("account", account[0]);
                 App.account = account;
                 // quering for the account address on the DOM
-                $('#accountAddress').html("Your Account: " + account);
+                $('#accountAddress').html(account);
             }
         })
         // display total token supply on the whole network
@@ -162,10 +162,11 @@ App = {
     // setSwap function that will be triggered as soon as submit button ("Swap Tokens") is triggered
     setSwap: function () {
         var content = $('#content');
-        content.hide();
+        //content.hide();
 
         // get all variables needed for htlc from the html form
         var receiverAddress = $('#receiverAddress').val();
+        //you have to add 0x0 before the hashlock
         var hashlock = $('#hashlock').val();
         var timelock = $('#timelock').val();
         var tokenAmount = $('#numberOfToken').val();
