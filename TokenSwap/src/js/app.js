@@ -88,7 +88,7 @@ App = {
                 console.log("account", account[0]);
                 App.account = account;
                 // quering for the account address on the DOM
-                $('#accountAddress').html(account);
+                $('#accountAddress').html("Your account" + account);
             }
         })
         // display total token supply on the whole network
