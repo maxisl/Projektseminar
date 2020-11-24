@@ -10,6 +10,7 @@ App = {
         return await App.initWeb3();
     },
 
+    // connect web3
     initWeb3: async function () {
         // Modern dapp browsers...
         if (window.ethereum) {
@@ -31,7 +32,7 @@ App = {
             App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
         }
         web3 = new Web3(App.web3Provider);
-        return App.initContract();
+        return App.accessContract();
     },
 
     // instantiate smart contract so web3 knows where to find it and
@@ -59,6 +60,23 @@ App = {
                 });
             })
         });
+    },
+
+    accessContract: function() {
+        // load abi of deployed contract
+        var fs = require('fs');
+        var jsonFile = "../contracts/TokenSwapCoin.json";
+        var parsed= JSON.parse(fs.readFileSync(jsonFile));
+        var abi = parsed.abi;
+        // load deployed contract
+        var htlc = new web3.eth.Contract(abi, 0x3ef96443Cc84f06d74E726B8bef9E63C4A60037c);
+        htlc.deployed().then(function(address) {
+
+        })
+        /*
+        const abi2 = ["./HashedTimelockERC20.json"];
+        var contractInstance = web3.eth.contract(abi).at("0x87E531194fA90cAC7496b1Aa4039dcf60d67c40D");
+        */
     }
 
 
