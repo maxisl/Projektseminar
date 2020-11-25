@@ -69,8 +69,8 @@ App = {
             App.contracts.TokenSwapCoin = TruffleContract(TokenSwapCoinArtifact);
             App.contracts.TokenSwapCoin.setProvider(App.web3Provider);
             App.contracts.TokenSwapCoin.at("0x3ef96443Cc84f06d74E726B8bef9E63C4A60037c").then(function (TokenSwapCoin) {
+                // test purposes only
                 console.log("Token address: ", TokenSwapCoin.address);
-                return TokenSwapCoin.balanceOf("0x7885c1BFE70624Cf6C83a784dE298AC53CA63CF5");
             }).then(function (balance) {
                 console.log(balance.toNumber());
             })
