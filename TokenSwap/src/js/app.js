@@ -120,19 +120,6 @@ App = {
             })
     },
 
-    /*
-        approveContract: function() {
-            App.contracts.HashedTimelockERC20.deployed().then(function (instance) {
-                HashedTimelockERC20Instance = instance;
-                return HashedTimelockERC20Instance.address;
-            }).then(function (address) {
-                App.contracts.TokenSwapCoin.deployed().then(function (instance) {
-                    TokenSwapCoinInstance = instance;
-                    return TokenSwapCoinInstance.approve(address, 10000, {from: App.account});
-                })
-            })
-        },*/
-
 
     //FIXME
     approveContract: function () {
