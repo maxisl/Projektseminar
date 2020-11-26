@@ -49,7 +49,7 @@ App = {
             // set the web3 provider for the contract
             App.contracts.HashedTimelockERC20.setProvider(App.web3Provider);
             // deployment for testing
-            App.contracts.HashedTimelockERC20.at("0x87E531194fA90cAC7496b1Aa4039dcf60d67c40D").then(function (HashedTimelockERC20) {
+            App.contracts.HashedTimelockERC20.at("0x6c3DB88E97dA81f4B7CD49f68FaC6A2430222380").then(function (HashedTimelockERC20) {
                 console.log("HashedTimelock contract address: ", HashedTimelockERC20.address);
             });
         }).done(function () {
@@ -57,12 +57,12 @@ App = {
                 var TokenSwapCoinArtifact = data;
                 App.contracts.TokenSwapCoin = TruffleContract(TokenSwapCoinArtifact);
                 App.contracts.TokenSwapCoin.setProvider(App.web3Provider);
-                App.contracts.TokenSwapCoin.at("0x3ef96443Cc84f06d74E726B8bef9E63C4A60037c").then(function (TokenSwapCoin) {
+                App.contracts.TokenSwapCoin.at("0x3a882dc305682f10A992fbC50C8C2E03eCb7b260").then(function (TokenSwapCoin) {
                     console.log("Token address: ", TokenSwapCoin.address);
 
                 });
                 //  return App.render();
-                return App.testContracts();
+                //return App.testContracts();
             })
         });
     },
