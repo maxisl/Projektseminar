@@ -12,6 +12,10 @@ if(fs.existsSync('secret.json')) {
   secrets = JSON.parse(fs.readFileSync('secret.json', 'utf8'));
 }
 
+if(fs.existsSync('secret.json')) {
+  secrets2 = JSON.parse(fs.readFileSync('secret2.json', 'utf8'));
+}
+
 module.exports = {
   networks: {
     ropsten: {
@@ -24,6 +28,14 @@ module.exports = {
     },
     rinkeby: {
       provider: () => new HDWalletProvider(secrets.mnemonic, 'https://rinkeby.infura.io/v3/' + secrets.infuraApiKey, 0, 2),
+      network_id: '4'
+    },
+    goerli_user2: {
+      provider: () => new HDWalletProvider(secrets2.mnemonic, 'https://goerli.infura.io/v3/' + secrets.infuraApiKey, 0, 2),
+      network_id: '5'
+    },
+    rinkeby_user2: {
+      provider: () => new HDWalletProvider(secrets2.mnemonic, 'https://rinkeby.infura.io/v3/' + secrets.infuraApiKey, 0, 2),
       network_id: '4'
     },
     development: {
