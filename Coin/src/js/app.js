@@ -213,7 +213,7 @@ App = {
     },
 
     // shows the timelock in percent in the progress bar on the homepage
-    //FIXME: fires metamask transaction, that has to be confirmed specifically
+    // FIXME: fires metamask transaction, that has to be confirmed specifically
 
     //idea: use getContract(contractId).call() to not need a pop up window (web3 function)
     //then calculate remaining time by using date.now() somehow
