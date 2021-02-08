@@ -16,6 +16,7 @@ if(fs.existsSync('secret.json')) {
   secrets2 = JSON.parse(fs.readFileSync('secret2.json', 'utf8'));
 }
 
+// user 2 for demonstration purposes
 module.exports = {
   networks: {
     ropsten: {
