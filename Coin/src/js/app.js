@@ -206,7 +206,7 @@ App = {
     },
 
     //TODO [IDEA]: implement a progress bar that shows timelock expiry in percent
-    /*
+
     timelockProgress: function () {
         console.log("timelockProgress was executed");
         const swapId = $("#input-swapId").val();
@@ -224,7 +224,7 @@ App = {
             $('#remaining-time').html(remaining);
         })
     },
-     */
+
 
     // for testing
     testCall: function () {
